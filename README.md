@@ -1,4 +1,4 @@
-[![npm](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/stl-part-viewer)
+[![npm version](https://badge.fury.io/js/stl-part-viewer.svg)](https://badge.fury.io/js/stl-part-viewer)
 
 
 # \<stl-part-viewer\>
