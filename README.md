@@ -1,6 +1,6 @@
-# \<part-viewer\>
+# \<stl-part-viewer\>
 
-> A web component that displays an STL part file with three.js, Polymer 3, and LitHTML.
+> SA web component that displays an STL part file with three.js, Polymer 3, and LitHTML.
 
 ![screenshot of stl-part-viewer](https://user-images.githubusercontent.com/643503/41803627-a4daf090-763f-11e8-9ef1-a2e11b0a34c6.png)
 
