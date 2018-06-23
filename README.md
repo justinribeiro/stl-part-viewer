@@ -1,3 +1,6 @@
+[![npm](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/stl-part-viewer)
+
+
 # \<stl-part-viewer\>
 
 > A web component that displays an STL part file with three.js, Polymer 3, and LitHTML.
