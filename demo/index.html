@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>part-viewer demo</title>
+
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/intersection-observer/intersection-observer.js"></script>
+
+    <script type="module">
+      import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
+      import '@polymer/iron-demo-helpers/demo-snippet';
+    </script>
+
+    <script type="module" src="../stl-part-viewer.js"></script>
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic stl-part-viewer demo</h3>
+      <demo-snippet>
+        <template>
+          <stl-part-viewer src="polymer-ascii.stl"></stl-part-viewer>
+        </template>
+      </demo-snippet>
+      <h3>stl-part-viewer model color</h3>
+      <demo-snippet>
+        <template>
+          <stl-part-viewer
+            src="polymer-binary.stl" modelcolor="hsl(0, 100%, 50%)">
+          </stl-part-viewer>
+        </template>
+      </demo-snippet>
+      <h3>stl-part-viewer background color</h3>
+      <demo-snippet>
+        <template>
+          <stl-part-viewer
+            src="polymer-ascii.stl" backgroundcolor="hsl(185, 100%, 65%)">
+          </stl-part-viewer>
+        </template>
+      </demo-snippet>
+      <h3>stl-part-viewer floor color</h3>
+      <demo-snippet>
+        <template>
+          <stl-part-viewer
+            src="polymer-binary.stl" floorcolor="hsl(100, 100%, 65%)">
+          </stl-part-viewer>
+        </template>
+      </demo-snippet>
+      <h3>stl-part-viewer fullscreen text</h3>
+      <demo-snippet>
+        <template>
+          <stl-part-viewer
+            src="polymer-ascii.stl" fullscreen="tela cheia">
+          </stl-part-viewer>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>

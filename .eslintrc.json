@@ -1,0 +1,27 @@
+{
+  "extends": ["eslint:recommended", "google"],
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "max-len": ["error", {
+      "ignoreTemplateLiterals": true,
+      "ignoreStrings": true
+    }],
+    "no-var": "off",
+    "arrow-parens": "off",
+    "new-cap": "off",
+    "indent": [2, 2],
+    "brace-style": [2, "1tbs"],
+    "padded-blocks": ["error", {
+      "blocks": "never",
+      "classes": "never",
+      "switches": "never"
+    }]
+  },
+  "globals": {
+  }
+}
