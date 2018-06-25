@@ -1,9 +1,8 @@
-[![npm version](https://badge.fury.io/js/stl-part-viewer.svg)](https://badge.fury.io/js/stl-part-viewer)
-
+[![npm version](https://badge.fury.io/js/%40justinribeiro%2Fstl-part-viewer.svg)](https://badge.fury.io/js/%40justinribeiro%2Fstl-part-viewer)
 
 # \<stl-part-viewer\>
 
-> A web component that displays an STL part file with three.js, Polymer 3, and LitHTML.
+> A web component that displays an STL model with three.js, Polymer 3, and LitHTML.
 
 ![screenshot of stl-part-viewer](https://user-images.githubusercontent.com/643503/41803627-a4daf090-763f-11e8-9ef1-a2e11b0a34c6.png)
 
@@ -22,9 +21,9 @@ available on NPM:
 Install stl-part-viewer:
 
 ```sh
-npm i stl-part-viewer --save
+npm i @justinribeiro/stl-part-viewer
 # or
-yarn add stl-part-viewer
+yarn add @justinribeiro/stl-part-viewer
 ```
 
 After install, import into your project:
