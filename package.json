@@ -7,7 +7,7 @@
     "url": "git@github.com:justinribeiro/stl-part-viewer.git"
   },
   "license": "MIT",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "stl-part-viewer.js",
   "dependencies": {
     "@polymer/lit-element": "^0.5.2",
@@ -25,6 +25,8 @@
     "web components",
     "lit-html",
     "lit-element",
-    "three.js"
+    "three.js",
+    "stl",
+    "model viewer"
   ]
 }
