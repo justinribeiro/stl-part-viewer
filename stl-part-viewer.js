@@ -118,7 +118,12 @@ class StlPartViewer extends LitElement {
     this.__setReflection();
     this.__setGrid();
     this.__setLights();
+  }
 
+  /**
+   * lit-element: Called after the element DOM is rendered for the first time.
+   */
+  _firstRendered() {
     // because composed DOM is one microtask after the dom mutates;
     // we need to sync the composition so that we can get offsetWidth for the
     // render, otherwise will return 0 (incorrectly)
@@ -129,6 +134,13 @@ class StlPartViewer extends LitElement {
       // no shadydom for you
     }
 
+    this.__initRender();
+  }
+
+  /**
+   * Fire up the renderer
+   */
+  __initRender() {
     const canvas = this.shadowRoot.querySelector('canvas');
 
     this._renderer = new WebGLRenderer({
