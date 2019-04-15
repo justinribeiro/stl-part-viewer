@@ -7,12 +7,12 @@
     "url": "git@github.com:justinribeiro/stl-part-viewer.git"
   },
   "license": "MIT",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "main": "stl-part-viewer.js",
   "dependencies": {
-    "@polymer/lit-element": "^0.5.2",
+    "lit-element": "^2.1.0",
     "intersection-observer": "^0.5.0",
-    "three": "^0.93.0"
+    "three": "^0.103.0"
   },
   "devDependencies": {
     "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
