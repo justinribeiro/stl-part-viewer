@@ -1,4 +1,4 @@
-import {LitElement, html} from '@polymer/lit-element';
+import {LitElement, html, css} from 'lit-element';
 import {
   Scene,
   WebGLRenderer,
@@ -66,31 +66,34 @@ class StlPartViewer extends LitElement {
     };
   }
 
-  _render({fullscreen}) {
+  static get styles() {
+    return css`
+      :host {
+        display: block;
+        position: relative;
+        width: 100%;
+        min-height: 400px;
+        line-height: 0;
+      }
+      canvas {
+        width: 100%;
+        min-height: 400px;
+      }
+      button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+        padding: 5px;
+      }
+    `;
+  }
+
+  render() {
     return html`
-      <style>
-        :host {
-          display: block;
-          position: relative;
-          width: 100%;
-          min-height: 400px;
-          line-height: 0;
-        }
-        canvas {
-          width: 100%;
-          min-height: 400px;
-        }
-        button {
-          position: absolute;
-          top: 20px;
-          right: 20px;
-          border-radius: 3px;
-          border: 1px solid #ccc;
-          padding: 5px;
-        }
-      </style>
       <button on-click="${this.__enterFullscreen.bind(this)}">
-        ${fullscreen}
+        ${this.fullscreen}
       </button>
       <canvas></canvas>
     `;
@@ -123,7 +126,7 @@ class StlPartViewer extends LitElement {
   /**
    * lit-element: Called after the element DOM is rendered for the first time.
    */
-  _firstRendered() {
+  firstUpdated() {
     // because composed DOM is one microtask after the dom mutates;
     // we need to sync the composition so that we can get offsetWidth for the
     // render, otherwise will return 0 (incorrectly)

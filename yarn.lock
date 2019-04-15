@@ -29,13 +29,6 @@
   dependencies:
     "@polymer/polymer" "^3.0.0"
 
-"@polymer/lit-element@^0.5.2":
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/@polymer/lit-element/-/lit-element-0.5.2.tgz#8d4e2d1ada27cf0f1a38b7b0eb9fadae92eb63df"
-  dependencies:
-    "@polymer/polymer" "^3.0.2"
-    lit-html "^0.10.0"
-
 "@polymer/marked-element@^3.0.0-pre.19":
   version "3.0.0-pre.19"
   resolved "https://registry.yarnpkg.com/@polymer/marked-element/-/marked-element-3.0.0-pre.19.tgz#e4288e1590309cb08654098ea386927c09690429"
@@ -43,7 +36,7 @@
     "@polymer/polymer" "^3.0.0"
     marked "~0.3.9"
 
-"@polymer/polymer@^3.0.0", "@polymer/polymer@^3.0.2":
+"@polymer/polymer@^3.0.0":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@polymer/polymer/-/polymer-3.0.2.tgz#626e6f9fae9716b0962ce0211e21df242153eab2"
   dependencies:
@@ -235,9 +228,17 @@ json3@3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/json3/-/json3-3.3.2.tgz#3c0434743df93e2f5c42aee7b19bcb483575f4e1"
 
-lit-html@^0.10.0:
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-0.10.2.tgz#53c846afcf91bb1e6623179ef22e327ab8ac0e0e"
+lit-element@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/lit-element/-/lit-element-2.1.0.tgz#85bc3f1da0227f4b13de8a1be978229b9fa327e9"
+  integrity sha512-0z/KHm1xZweivfOVRr8AKR06+D3k02u15m9s4jkuRdnGe5wfmEwePzrQQBsSZNILdnfJvfo3TJOeGhBCVZaPbw==
+  dependencies:
+    lit-html "^1.0.0"
+
+lit-html@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-1.0.0.tgz#3dc3781a8ca68a9b5c2ff2a61e263662b9b2267b"
+  integrity sha512-oeWlpLmBW3gFl7979Wol2LKITpmKTUFNn7PnFbh6YNynF61W74l6x5WhwItAwPRSATpexaX1egNnRzlN4GOtfQ==
 
 lodash._baseassign@^3.0.0:
   version "3.2.0"
@@ -399,9 +400,10 @@ supports-color@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-2.0.0.tgz#535d045ce6b6363fa40117084629995e9df324c7"
 
-three@^0.93.0:
-  version "0.93.0"
-  resolved "https://registry.yarnpkg.com/three/-/three-0.93.0.tgz#3fd6c367ef4554abbb6e16ad69936283e895c123"
+three@^0.103.0:
+  version "0.103.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.103.0.tgz#63b3dbccc861caad93269618061a73dadebae71b"
+  integrity sha512-4WKRHTMt96sp+lX+Hx/eHtN9CWFyejDqr1ikgxZUJIkKEHVglSE7FY8n81NC6yWXqVSjUIQQppaxsoUe26Zi9g==
 
 tiny-emitter@^2.0.0:
   version "2.0.2"
