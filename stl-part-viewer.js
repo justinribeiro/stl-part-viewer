@@ -92,7 +92,7 @@ class StlPartViewer extends LitElement {
 
   render() {
     return html`
-      <button on-click="${this.__enterFullscreen.bind(this)}">
+      <button @click="${this.__enterFullscreen}">
         ${this.fullscreen}
       </button>
       <canvas></canvas>
