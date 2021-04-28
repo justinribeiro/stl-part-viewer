@@ -7,7 +7,7 @@
     "url": "git@github.com:justinribeiro/stl-part-viewer.git"
   },
   "license": "MIT",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "stl-part-viewer.js",
   "scripts": {
     "dev": "web-dev-server --node-resolve --watch --open"
