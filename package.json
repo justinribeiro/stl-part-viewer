@@ -1,6 +1,6 @@
 {
   "name": "@justinribeiro/stl-part-viewer",
-  "description": "A web component that displays an STL model with three.js, Polymer 3, and LitHTML.",
+  "description": "A web component that displays an STL model with three.js and Lit.",
   "author": "Justin Ribeiro <justin@justinribeiro.com>",
   "repository": {
     "type": "git",
@@ -9,20 +9,22 @@
   "license": "MIT",
   "version": "1.0.2",
   "main": "stl-part-viewer.js",
+  "scripts": {
+    "dev": "web-dev-server --node-resolve --watch --open"
+  },
   "dependencies": {
-    "lit-element": "^2.1.0",
     "intersection-observer": "^0.5.0",
+    "lit": "^2.0.0-rc.1",
     "three": "^0.103.0"
   },
   "devDependencies": {
     "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
+    "@web/dev-server": "^0.1.16",
     "@webcomponents/webcomponentsjs": "^2.0.0",
     "wct-browser-legacy": "^1.0.0"
   },
   "keywords": [
-    "polymer",
-    "polymer 3",
-    "web components",
+    "web component",
     "lit-html",
     "lit-element",
     "three.js",

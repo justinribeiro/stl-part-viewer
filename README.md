@@ -2,7 +2,7 @@
 
 # \<stl-part-viewer\>
 
-> A web component that displays an STL model with three.js, Polymer 3, and LitHTML.
+> A web component that displays an STL model with [three.js](https://threejs.org/) and [Lit](https://lit.dev/).
 
 ![screenshot of stl-part-viewer](https://user-images.githubusercontent.com/643503/41803627-a4daf090-763f-11e8-9ef1-a2e11b0a34c6.png)
 
@@ -51,16 +51,12 @@ flexibility.
  | `modelcolor` | Set the model color; rgb(), hsl(), or X11 color string | `0xfffe57` |
 
 ## Polyfills Required
-`stl-part-viewer` utilizes Custom Elements and Shadow DOM ([Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components)), and [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). As you can see in the table below, you'll need some polyfills to make use of this across a wide range of browsers.
-
-| Platform Support   | Chrome | Chrome for Android | Firefox | Safari | iOS Safari | Edge | IE 11 |
-| ------------------ |:------:|:------:|:------:|:------:|:------:|:----:|:-----:|
-| Supported          |✓|✓|✓|✓|✓|✓|✓|✓|
-| Polyfill(s) Required |-|-|✓|✓|✓|✓|✓|✓|
+`stl-part-viewer` utilizes Custom Elements and Shadow DOM ([Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components)), and [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). You may need the [Lit polyfill-support](https://lit.dev/docs/releases/upgrade/#load-polyfill-support-when-using-web-components-polyfills) depending on what you're trying to target.
 
 Within your project, you can load them as such:
 
 ```html
 <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+<script src="../node_modules/lit/platform-support.js">
 <script src="../node_modules/intersection-observer/intersection-observer.js"></script>
 ```

@@ -1,16 +1,25 @@
-import {LitElement, html, css} from 'lit-element';
+import { LitElement, html, css } from "lit";
 import {
   Scene,
   WebGLRenderer,
-  PerspectiveCamera, CubeCamera,
-  Vector3, Box3,
-  Color, Fog,
-  HemisphereLight, SpotLight, PointLight,
-  GridHelper, PlaneGeometry, DoubleSide,
-  Mesh, MeshPhongMaterial, SmoothShading
-} from 'three';
-import {StlLoader} from './stl-loader';
-import {OrbitControls} from './orbit-controls';
+  PerspectiveCamera,
+  CubeCamera,
+  Vector3,
+  Box3,
+  Color,
+  Fog,
+  HemisphereLight,
+  SpotLight,
+  PointLight,
+  GridHelper,
+  PlaneGeometry,
+  DoubleSide,
+  Mesh,
+  MeshPhongMaterial,
+  SmoothShading,
+} from "three";
+import { StlLoader } from "./stl-loader";
+import { OrbitControls } from "./orbit-controls";
 
 /**
  * `stl-part-viewer`
@@ -105,7 +114,7 @@ class StlPartViewer extends LitElement {
     this._modelLoaded = false;
     this._pauseRender = false;
 
-    this.fullscreen = 'Full Screen';
+    this.fullscreen = "Full Screen";
     this.backgroundcolor = 0xf1f1f1;
     this.floorcolor = 0x666666;
     this.modelcolor = 0xfffe57;
@@ -133,7 +142,7 @@ class StlPartViewer extends LitElement {
     // only valid for the ShadyDOM polyfill; this won't run when Shadow in use
     try {
       ShadyDOM.flush();
-    } catch(e) {
+    } catch (e) {
       // no shadydom for you
     }
 
@@ -144,7 +153,7 @@ class StlPartViewer extends LitElement {
    * Fire up the renderer
    */
   __initRender() {
-    const canvas = this.shadowRoot.querySelector('canvas');
+    const canvas = this.shadowRoot.querySelector("canvas");
 
     this._renderer = new WebGLRenderer({
       canvas: canvas,
@@ -159,10 +168,10 @@ class StlPartViewer extends LitElement {
     this.__initFullScreenApi();
 
     // TODO blah, this is dumb, polyfill ResizeObserver and use that
-    window.addEventListener('resize', (e) => {
+    window.addEventListener("resize", (e) => {
       try {
         ShadyDOM.flush();
-      } catch(e) {
+      } catch (e) {
         // no shadydom for you
       }
 
@@ -179,12 +188,12 @@ class StlPartViewer extends LitElement {
   __initIntersectionObserver() {
     const options = {
       root: null,
-      rootMargin: '0px',
-      threshold: 0
-    }
+      rootMargin: "0px",
+      threshold: 0,
+    };
 
     const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting && !this._modelLoaded) {
           this.__loadModel();
         }
@@ -196,7 +205,7 @@ class StlPartViewer extends LitElement {
         }
 
         // The intersection observer starts the renderer
-        if(!this._pauseRender) {
+        if (!this._pauseRender) {
           this.__render();
         }
       });
@@ -212,10 +221,12 @@ class StlPartViewer extends LitElement {
    * @private
    */
   __isFullScreenElement() {
-    return document.webkitFullScreenElement ||
+    return (
+      document.webkitFullScreenElement ||
       document.webkitCurrentFullScreenElement ||
       document.mozFullScreenElement ||
-      document.fullScreenElement;
+      document.fullScreenElement
+    );
   }
 
   /**
@@ -225,23 +236,30 @@ class StlPartViewer extends LitElement {
    * @private
    */
   __initFullScreenApi() {
-    const canvas = this.shadowRoot.querySelector('canvas');
+    const canvas = this.shadowRoot.querySelector("canvas");
 
-    canvas.onfullscreenchange = canvas.onwebkitfullscreenchange =
-      canvas.onmozfullscreenchange = (event) => {
-        if (this.__isFullScreenElement()) {
-          // TODO why is full screen so slow on calc? innerWidth/Height are
-          // wrong, doesn't render correctly
-          setTimeout(() =>
+    canvas.onfullscreenchange = canvas.onwebkitfullscreenchange = canvas.onmozfullscreenchange = (
+      event
+    ) => {
+      if (this.__isFullScreenElement()) {
+        // TODO why is full screen so slow on calc? innerWidth/Height are
+        // wrong, doesn't render correctly
+        setTimeout(
+          () =>
             this.__setProjectionMatrix(window.innerWidth, window.innerHeight),
-            200);
-        } else {
-          setTimeout(() =>
-            this.__setProjectionMatrix(this._elementDimensions.width,
-              this._elementDimensions.height),
-            200);
-        }
-      };
+          200
+        );
+      } else {
+        setTimeout(
+          () =>
+            this.__setProjectionMatrix(
+              this._elementDimensions.width,
+              this._elementDimensions.height
+            ),
+          200
+        );
+      }
+    };
   }
 
   /**
@@ -251,18 +269,16 @@ class StlPartViewer extends LitElement {
    * @private
    */
   __enterFullscreen() {
-    const canvas = this.shadowRoot.querySelector('canvas');
+    const canvas = this.shadowRoot.querySelector("canvas");
 
     this._pauseRender = false;
     this.__render();
 
     if (canvas.mozRequestFullScreen) {
       canvas.mozRequestFullScreen();
-    }
-    else if (canvas.webkitRequestFullScreen) {
+    } else if (canvas.webkitRequestFullScreen) {
       canvas.webkitRequestFullScreen();
-    }
-    else {
+    } else {
       canvas.requestFullscreen();
     }
   }
@@ -278,14 +294,19 @@ class StlPartViewer extends LitElement {
     this._scene.add(this._reflectionCamera);
 
     this._reflectionPlane = new Mesh(
-      new PlaneGeometry(1000, 1000, Math.floor(1000 / 30), Math.floor(1000 / 30)),
+      new PlaneGeometry(
+        1000,
+        1000,
+        Math.floor(1000 / 30),
+        Math.floor(1000 / 30)
+      ),
       new MeshPhongMaterial({
         color: new Color(this.floorcolor),
         wireframe: false,
         envMap: this._reflectionCamera.renderTarget.texture,
-      }),
+      })
     );
-    this._reflectionPlane.name = 'reflection';
+    this._reflectionPlane.name = "reflection";
     this._reflectionPlane.receiveShadow = true;
     this._scene.add(this._reflectionPlane);
   }
@@ -297,7 +318,7 @@ class StlPartViewer extends LitElement {
    */
   __setGrid() {
     this._gridHelper = new GridHelper(1000, 50, 0xffffff, 0xffffff);
-    this._gridHelper.geometry.rotateX( Math.PI / 2 );
+    this._gridHelper.geometry.rotateX(Math.PI / 2);
     this._gridHelper.lookAt(new Vector3(0, 0, 1));
     this._scene.add(this._gridHelper);
   }
@@ -308,7 +329,7 @@ class StlPartViewer extends LitElement {
    * @private
    */
   __setLights() {
-    const hemiphereLight= new HemisphereLight(0xffffbb, 0x080820, 0.5);
+    const hemiphereLight = new HemisphereLight(0xffffbb, 0x080820, 0.5);
     this._scene.add(hemiphereLight);
 
     const spotLightFront = new SpotLight(0xffffff, 0.5, 0);
@@ -345,13 +366,17 @@ class StlPartViewer extends LitElement {
     // immediately, so we just cache it for speed
     // TODO track this on potential element resizing
     this._elementDimensions = {
-      'width': this.offsetWidth,
-      'height': this.offsetHeight,
+      width: this.offsetWidth,
+      height: this.offsetHeight,
     };
 
-    this._camera = new PerspectiveCamera(36,
-      this.offsetWidth / this.offsetHeight, 0.1, 1000);
-    this._camera.position.set(-350, -100, 100)
+    this._camera = new PerspectiveCamera(
+      36,
+      this.offsetWidth / this.offsetHeight,
+      0.1,
+      1000
+    );
+    this._camera.position.set(-350, -100, 100);
     this._camera.up = new Vector3(0, 0, 1);
 
     this.__setProjectionMatrix(this.offsetWidth, this.offsetHeight);
@@ -393,7 +418,7 @@ class StlPartViewer extends LitElement {
       flatShading: SmoothShading,
       shininess: 25,
       fog: false,
-      side: DoubleSide
+      side: DoubleSide,
     });
 
     const model = new Mesh(geometry, material);
@@ -407,7 +432,7 @@ class StlPartViewer extends LitElement {
 
     model.position.x = -((boundingBoxMin.x + boundingBoxMax.x) / 2) * scale;
     model.position.y = -((boundingBoxMin.y + boundingBoxMin.y) / 2) * scale;
-    model.position.z = -(boundingBoxMin.z) * scale;
+    model.position.z = -boundingBoxMin.z * scale;
     this._scene.add(model);
 
     this.__centerCamera();
@@ -423,7 +448,7 @@ class StlPartViewer extends LitElement {
 
     this._scene.traverse((object) => {
       if (object instanceof Mesh) {
-        if (object.name === 'reflection') {
+        if (object.name === "reflection") {
           return;
         }
 
@@ -435,10 +460,13 @@ class StlPartViewer extends LitElement {
         boundingBox.getCenter(boundingBoxCenter);
         boundingBox.getSize(boundingBoxSize);
 
-        const dimension = Math.max(boundingBoxSize.x, boundingBoxSize.y,
-          boundingBoxSize.z);
-        const fov = this._camera.fov * ( Math.PI / 180 );
-        const cameraZ = (Math.abs(dimension / 4 * Math.tan(fov * 2))) * offset;
+        const dimension = Math.max(
+          boundingBoxSize.x,
+          boundingBoxSize.y,
+          boundingBoxSize.z
+        );
+        const fov = this._camera.fov * (Math.PI / 180);
+        const cameraZ = Math.abs((dimension / 4) * Math.tan(fov * 2)) * offset;
 
         let cameraToFarEdge;
         if (boundingBox.min.z < 0) {
@@ -506,4 +534,4 @@ class StlPartViewer extends LitElement {
   }
 }
 
-window.customElements.define('stl-part-viewer', StlPartViewer);
+window.customElements.define("stl-part-viewer", StlPartViewer);
