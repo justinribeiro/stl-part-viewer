@@ -13,9 +13,8 @@
     "dev": "web-dev-server --node-resolve --watch --open"
   },
   "dependencies": {
-    "intersection-observer": "^0.5.0",
-    "lit": "^2.0.0-rc.1",
-    "three": "^0.103.0"
+    "lit": "^2.0.0",
+    "three": "^0.125.0"
   },
   "devDependencies": {
     "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
@@ -25,7 +24,7 @@
   },
   "keywords": [
     "web component",
-    "lit-html",
+    "lit",
     "lit-element",
     "three.js",
     "stl",
