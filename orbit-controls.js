@@ -222,19 +222,31 @@ export default function OrbitControls(object, domElement) {
     };
   })();
 
-  this.dispose = function() {
-    scope.domElement.removeEventListener("contextmenu", onContextMenu, false);
-    scope.domElement.removeEventListener("mousedown", onMouseDown, false);
-    scope.domElement.removeEventListener("wheel", onMouseWheel, false);
+  this.dispose = function () {
+    scope.domElement.removeEventListener("contextmenu", onContextMenu, {
+      passive: true,
+    });
+    scope.domElement.removeEventListener("mousedown", onMouseDown, {
+      passive: true,
+    });
+    scope.domElement.removeEventListener("wheel", onMouseWheel, {
+      passive: true,
+    });
 
-    scope.domElement.removeEventListener("touchstart", onTouchStart, false);
-    scope.domElement.removeEventListener("touchend", onTouchEnd, false);
-    scope.domElement.removeEventListener("touchmove", onTouchMove, false);
+    scope.domElement.removeEventListener("touchstart", onTouchStart, {
+      passive: true,
+    });
+    scope.domElement.removeEventListener("touchend", onTouchEnd, {
+      passive: true,
+    });
+    scope.domElement.removeEventListener("touchmove", onTouchMove, {
+      passive: true,
+    });
 
-    document.removeEventListener("mousemove", onMouseMove, false);
-    document.removeEventListener("mouseup", onMouseUp, false);
+    document.removeEventListener("mousemove", onMouseMove, { passive: true });
+    document.removeEventListener("mouseup", onMouseUp, { passive: true });
 
-    window.removeEventListener("keydown", onKeyDown, false);
+    window.removeEventListener("keydown", onKeyDown, { passive: true });
 
     //scope.dispatchEvent( { type: 'dispose' } ); // should this be added here?
   };
@@ -256,7 +268,7 @@ export default function OrbitControls(object, domElement) {
     PAN: 2,
     TOUCH_ROTATE: 3,
     TOUCH_DOLLY: 4,
-    TOUCH_PAN: 5
+    TOUCH_PAN: 5,
   };
 
   var state = STATE.NONE;
@@ -299,7 +311,7 @@ export default function OrbitControls(object, domElement) {
     sphericalDelta.phi -= angle;
   }
 
-  var panLeft = (function() {
+  var panLeft = (function () {
     var v = new Vector3();
 
     return function panLeft(distance, objectMatrix) {
@@ -310,7 +322,7 @@ export default function OrbitControls(object, domElement) {
     };
   })();
 
-  var panUp = (function() {
+  var panUp = (function () {
     var v = new Vector3();
 
     return function panUp(distance, objectMatrix) {
@@ -322,7 +334,7 @@ export default function OrbitControls(object, domElement) {
   })();
 
   // deltaX and deltaY are in pixels; right and down are positive
-  var pan = (function() {
+  var pan = (function () {
     var offset = new Vector3();
 
     return function pan(deltaX, deltaY) {
@@ -414,7 +426,7 @@ export default function OrbitControls(object, domElement) {
   //
 
   function handleMouseDownRotate(event) {
-  	rotateStart.set(event.clientX, event.clientY);
+    rotateStart.set(event.clientX, event.clientY);
   }
 
   function handleMouseDownDolly(event) {
@@ -598,7 +610,7 @@ export default function OrbitControls(object, domElement) {
   function onMouseDown(event) {
     if (scope.enabled === false) return;
 
-    event.preventDefault();
+    // event.preventDefault();
 
     if (event.button === scope.mouseButtons.ORBIT) {
       if (scope.enableRotate === false) return;
@@ -621,8 +633,8 @@ export default function OrbitControls(object, domElement) {
     }
 
     if (state !== STATE.NONE) {
-      document.addEventListener("mousemove", onMouseMove, false);
-      document.addEventListener("mouseup", onMouseUp, false);
+      document.addEventListener("mousemove", onMouseMove, { passive: true });
+      document.addEventListener("mouseup", onMouseUp, { passive: true });
 
       scope.dispatchEvent(startEvent);
     }
@@ -631,7 +643,7 @@ export default function OrbitControls(object, domElement) {
   function onMouseMove(event) {
     if (scope.enabled === false) return;
 
-    event.preventDefault();
+    // event.preventDefault();
 
     if (state === STATE.ROTATE) {
       if (scope.enableRotate === false) return;
@@ -653,8 +665,8 @@ export default function OrbitControls(object, domElement) {
 
     handleMouseUp(event);
 
-    document.removeEventListener("mousemove", onMouseMove, false);
-    document.removeEventListener("mouseup", onMouseUp, false);
+    document.removeEventListener("mousemove", onMouseMove, { passive: true });
+    document.removeEventListener("mouseup", onMouseUp, { passive: true });
 
     scope.dispatchEvent(endEvent);
 
@@ -732,7 +744,7 @@ export default function OrbitControls(object, domElement) {
   function onTouchMove(event) {
     if (scope.enabled === false) return;
 
-    event.preventDefault();
+    // event.preventDefault();
     event.stopPropagation();
 
     switch (event.touches.length) {
@@ -781,16 +793,24 @@ export default function OrbitControls(object, domElement) {
 
   //
 
-  scope.domElement.addEventListener("contextmenu", onContextMenu, false);
+  scope.domElement.addEventListener("contextmenu", onContextMenu, {
+    passive: true,
+  });
 
-  scope.domElement.addEventListener("mousedown", onMouseDown, false);
-  scope.domElement.addEventListener("wheel", onMouseWheel, false);
+  scope.domElement.addEventListener("mousedown", onMouseDown, {
+    passive: true,
+  });
+  scope.domElement.addEventListener("wheel", onMouseWheel, { passive: true });
 
-  scope.domElement.addEventListener("touchstart", onTouchStart, false);
-  scope.domElement.addEventListener("touchend", onTouchEnd, false);
-  scope.domElement.addEventListener("touchmove", onTouchMove, false);
+  scope.domElement.addEventListener("touchstart", onTouchStart, {
+    passive: true,
+  });
+  scope.domElement.addEventListener("touchend", onTouchEnd, { passive: true });
+  scope.domElement.addEventListener("touchmove", onTouchMove, {
+    passive: true,
+  });
 
-  window.addEventListener("keydown", onKeyDown, false);
+  window.addEventListener("keydown", onKeyDown, { passive: true });
 
   // force an update at start
 

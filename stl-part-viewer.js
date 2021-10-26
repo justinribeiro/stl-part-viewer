@@ -17,6 +17,9 @@ import {
   Mesh,
   MeshPhongMaterial,
   SmoothShading,
+  WebGLCubeRenderTarget,
+  RGBFormat,
+  LinearMipmapLinearFilter,
 } from "three";
 import { StlLoader } from "./stl-loader";
 import { OrbitControls } from "./orbit-controls";
@@ -101,9 +104,7 @@ class StlPartViewer extends LitElement {
 
   render() {
     return html`
-      <button @click="${this.__enterFullscreen}">
-        ${this.fullscreen}
-      </button>
+      <button @click="${this.__enterFullscreen}">${this.fullscreen}</button>
       <canvas></canvas>
     `;
   }
@@ -238,28 +239,32 @@ class StlPartViewer extends LitElement {
   __initFullScreenApi() {
     const canvas = this.shadowRoot.querySelector("canvas");
 
-    canvas.onfullscreenchange = canvas.onwebkitfullscreenchange = canvas.onmozfullscreenchange = (
-      event
-    ) => {
-      if (this.__isFullScreenElement()) {
-        // TODO why is full screen so slow on calc? innerWidth/Height are
-        // wrong, doesn't render correctly
-        setTimeout(
-          () =>
-            this.__setProjectionMatrix(window.innerWidth, window.innerHeight),
-          200
-        );
-      } else {
-        setTimeout(
-          () =>
-            this.__setProjectionMatrix(
-              this._elementDimensions.width,
-              this._elementDimensions.height
-            ),
-          200
-        );
-      }
-    };
+    canvas.onfullscreenchange =
+      canvas.onwebkitfullscreenchange =
+      canvas.onmozfullscreenchange =
+        (event) => {
+          if (this.__isFullScreenElement()) {
+            // TODO why is full screen so slow on calc? innerWidth/Height are
+            // wrong, doesn't render correctly
+            setTimeout(
+              () =>
+                this.__setProjectionMatrix(
+                  window.innerWidth,
+                  window.innerHeight
+                ),
+              200
+            );
+          } else {
+            setTimeout(
+              () =>
+                this.__setProjectionMatrix(
+                  this._elementDimensions.width,
+                  this._elementDimensions.height
+                ),
+              200
+            );
+          }
+        };
   }
 
   /**
@@ -290,7 +295,12 @@ class StlPartViewer extends LitElement {
    * @private
    */
   __setReflection() {
-    this._reflectionCamera = new CubeCamera(0.1, 1000, 512);
+    this._cubeRenderer = new WebGLCubeRenderTarget(512, {
+      format: RGBFormat,
+      generateMipmaps: true,
+      minFilter: LinearMipmapLinearFilter,
+    });
+    this._reflectionCamera = new CubeCamera(0.1, 1000, this._cubeRenderer);
     this._scene.add(this._reflectionCamera);
 
     this._reflectionPlane = new Mesh(
