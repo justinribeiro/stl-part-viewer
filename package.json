@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "lit": "^2.0.0",
-    "three": "^0.125.0"
+    "three": "^0.137.0"
   },
   "devDependencies": {
     "@polymer/iron-demo-helpers": "^3.0.2",
