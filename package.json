@@ -13,7 +13,7 @@
     "dev": "web-dev-server --node-resolve --watch --open"
   },
   "dependencies": {
-    "lit": "^2.0.0",
+    "lit": "^3.0.0",
     "three": "^0.125.0"
   },
   "devDependencies": {
