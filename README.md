@@ -1,3 +1,5 @@
+# Development moved to Codeberg: https://codeberg.org/justinribeiro/stl-part-viewer
+
 [![npm version](https://badge.fury.io/js/%40justinribeiro%2Fstl-part-viewer.svg)](https://badge.fury.io/js/%40justinribeiro%2Fstl-part-viewer)
 
 # \<stl-part-viewer\>
